@@ -12,8 +12,8 @@
     "author": "Jakub Nowakowski <jakub.nowakowski@keep.network>",
     "license": "ISC",
     "dependencies": {
-        "tbtc-helpers": "file:../lib/tbtc-helpers",
-        "web3": "^1.2.0"
+        "web3": "^1.2.0",
+        "tbtc-helpers": "^0.0.1"
     },
     "devDependencies": {
         "@babel/core": "^7.5.5",

@@ -1,6 +1,7 @@
-const secp256k1 = require('bcrypto/lib/secp256k1')
-const KeyRing = require('bcoin/lib/primitives/keyring')
-const Script = require('bcoin/lib/script').Script
+const secp256k1 = require('bcrypto/lib/secp256k1-browser')
+const bcoin = require('bcoin/lib/bcoin-browser')
+const { KeyRing, Script } = bcoin
+
 
 /**
  * Network type enumeration.
