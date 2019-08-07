@@ -1,5 +1,6 @@
 const electrumjs = require('electrumjs')
-const Sha256 = require('bcrypto/lib/sha256-browser')
+const Sha256 = require('bcrypto-browser').SHA256
+
 
 /**
  * Configuration of electrum client.

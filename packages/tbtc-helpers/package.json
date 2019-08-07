@@ -12,7 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "bcoin": "git+https://github.com/bcoin-org/bcoin.git",
-    "bcrypto": "^4.1.0",
+    "bcoin-browser": "0.0.1",
+    "bcrypto-browser": "^0.0.1",
     "bufio": "^1.0.6",
     "electrumjs": "^0.1.3"
   },

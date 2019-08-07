@@ -1,6 +1,6 @@
-const secp256k1 = require('bcrypto/lib/secp256k1-browser')
-const bcoin = require('bcoin/lib/bcoin-browser')
-const { KeyRing, Script } = bcoin
+const secp256k1 = require('bcrypto-browser').secp256k1
+const KeyRing = require('bcoin-browser').KeyRing
+const Script = require('bcoin-browser').Script
 
 
 /**

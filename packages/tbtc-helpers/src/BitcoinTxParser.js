@@ -1,6 +1,4 @@
-
-const bcoin = require('bcoin/lib/bcoin-browser')
-const bcoin_tx = bcoin.TX
+const bcoin_tx = require('bcoin-browser').TX
 const bufio = require('bufio')
 
 function parse(rawTx) {

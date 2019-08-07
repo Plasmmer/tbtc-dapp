@@ -1,0 +1,12 @@
+{
+    "name": "bcoin-browser",
+    "version": "0.0.1",
+    "main": "build.js",
+    "scripts": {
+        "build": "bpkg --browser --umd ../../node_modules/bcoin/lib/bcoin-browser.js build.js"
+    },
+    "devDependencies": {
+        "bcoin": "^1.0.2",
+        "bpkg": "^0.6.0"
+    }
+}

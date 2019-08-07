@@ -4,7 +4,9 @@
         "packages": [
             "packages/tbtc-helpers",
             "packages/tbtc-client",
-            "packages/tbtc-dapp"
+            "packages/tbtc-dapp",
+            "packages/bcoin-browser",
+            "packages/bcrypto-browser"
         ],
         "nohoist": [
             "**/ganache-cli/**",

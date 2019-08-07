@@ -1,8 +1,8 @@
 // JS implementation of merkle.py script from [summa-tx/bitcoin-spv] repository.
 //
 // [summa-tx/bitcoin-spv]: https://github.com/summa-tx/bitcoin-spv/
-const Hash256 = require('bcrypto/lib/hash256-browser')
-const Merkle = require('bcrypto/lib/merkle')
+const Hash256 = require('bcrypto-browser').Hash256
+const Merkle = require('bcrypto-browser').merkle
 
 /**
  * @typedef {Object} Proof
