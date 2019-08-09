@@ -2,7 +2,7 @@ import { call, put, takeLatest, select } from 'redux-saga/effects'
 import history from '../history'
 
 import { REQUEST_A_DEPOSIT, WAIT_CONFIRMATION, SUBMIT_DEPOSIT_PROOF } from '../actions'
-import { createDeposit, watchForFundingTransaction, waitForConfirmations } from 'tbtc-client'
+import { createDeposit, getDepositBtcAddress, watchForFundingTransaction, waitForConfirmations } from 'tbtc-client'
 import { METAMASK_TX_DENIED_ERROR } from '../chain'
 const ElectrumClient = require('tbtc-helpers').ElectrumClient
 const fs = require('fs')
@@ -20,8 +20,15 @@ export const DEPOSIT_PROVE_BTC_TX_BEGIN = 'DEPOSIT_PROVE_BTC_TX_BEGIN'
 export const DEPOSIT_PROVE_BTC_TX_SUCCESS = 'DEPOSIT_PROVE_BTC_TX_SUCCESS'
 
 function getElectrumClient() {
-    const config = JSON.parse(fs.readFileSync('../../config/config.json'))
-    const electrumClient = new ElectrumClient.Client(config.electrum.testnetPublic)
+    // const config = JSON.parse(fs.readFileSync('../../config/config.json'))
+
+    const config = {
+        server: "electrumx-server.tbtc.svc.cluster.local",
+        port: 50004,
+        protocol: "wss"
+    }
+
+    const electrumClient = new ElectrumClient.Client(config)
     return electrumClient
 }
 
@@ -48,13 +55,21 @@ function* requestADeposit() {
         }
     })
 
-    // now call the deposit contract
-    // and get the btc address
-    // goto next
+    let btcAddress
+    try {
+        // now call the deposit contract
+        // and get the btc address
+        btcAddress = yield call(getDepositBtcAddress, depositAddress)
+        yield put({ type: DEPOSIT_REQUEST_METAMASK_SUCCESS })
+    } catch (err) {
+        if (err.message.includes(METAMASK_TX_DENIED_ERROR)) return
+        throw err
+    }
+
     yield put({
         type: DEPOSIT_BTC_ADDRESS,
         payload: {
-            btcAddress: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa'
+            btcAddress,
         }
     })
 
@@ -63,16 +78,23 @@ function* requestADeposit() {
 }
 
 function* waitConfirmation() {
+    console.log("GET ELECTRUM CLIENT")
     const electrumClient = getElectrumClient()
-    const TESTNET_FUNDING_AMOUNT_SATOSHIS = 200
+
+    const TESTNET_FUNDING_AMOUNT_SATOSHIS = 100
+
+    console.log("ELECTRUM CLIENT", electrumClient)
 
     // wait for the transaction to be received and mined
-    const btcAddress = yield select(state => state.app.btcAddress)
+    // const btcAddress = yield select(state => state.app.btcAddress)
+    const btcAddress = "tb1qcpn5u60nmkr85sxdh7ceepksf04rvgar4tjzre"
     const fundingTx = yield call(watchForFundingTransaction, electrumClient, btcAddress, TESTNET_FUNDING_AMOUNT_SATOSHIS)
 
     yield put({
         type: BTC_TX_MINED
     })
+
+    console.log("FUNDING TRANSACTION FOUND: ", fundingTx)
 
     // wait a certain number of confirmations on this step
     yield put({
