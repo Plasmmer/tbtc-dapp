@@ -20,15 +20,9 @@ export const DEPOSIT_PROVE_BTC_TX_BEGIN = 'DEPOSIT_PROVE_BTC_TX_BEGIN'
 export const DEPOSIT_PROVE_BTC_TX_SUCCESS = 'DEPOSIT_PROVE_BTC_TX_SUCCESS'
 
 function getElectrumClient() {
-    // const config = JSON.parse(fs.readFileSync('../../config/config.json'))
+    const config = require('../config/config.json')
+    const electrumClient = new ElectrumClient.Client(config.electrum.testnetWS)
 
-    const config = {
-        server: "electrumx-server.tbtc.svc.cluster.local",
-        port: 50004,
-        protocol: "wss"
-    }
-
-    const electrumClient = new ElectrumClient.Client(config)
     return electrumClient
 }
 
