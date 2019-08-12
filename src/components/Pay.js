@@ -23,7 +23,6 @@ class Pay extends Component {
     document.execCommand('copy')
     this.hiddenCopyField.blur()
     this.setState({ copied: true })
-
   }
 
   render() {
@@ -31,7 +30,7 @@ class Pay extends Component {
     const { copied } = this.state
     let renderLeft, renderTitle;
 
-    if (btcConfirming) {
+    if (!btcConfirming) {
       renderLeft = (
         <div className="qr-code">
           TODO: QR CODE
