@@ -9,7 +9,7 @@ const Congratulations = () => (
     </div>
     <div className="page-body">
       <div className="step">
-        Step 5/5
+        Step 6/6
       </div>
       <div className="title">
         Complete
