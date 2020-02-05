@@ -125,9 +125,6 @@ workflows:
       - build_dapp:
           context: keep-dev
       - publish_dapp:
-          filters:
-            branches:
-              only: master
           context: keep-dev
           requires:
             - build_dapp
