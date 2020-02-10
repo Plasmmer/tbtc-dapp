@@ -1,4 +1,4 @@
-const TruffleContract = require('truffle-contract')
+const TruffleContract = require('@truffle/contract')
 const Web3 = require('web3')
 
 // Just a simple wrapper so we can prototype quickly

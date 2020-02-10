@@ -21,9 +21,9 @@
         "redux-saga": "^1.0.5",
         "tbtc-client": "file:client",
         "tbtc-helpers": "file:lib/tbtc-helpers",
-        "truffle": "^5.0.29",
-        "truffle-contract": "^4.0.26",
-        "web3": "^1.2.0"
+        "truffle": "^5.1.12",
+        "@truffle/contract": "^4.1.8",
+        "web3": "^1.2.6"
     },
     "scripts": {
         "env": "truffle exec ./scripts/env.js",
